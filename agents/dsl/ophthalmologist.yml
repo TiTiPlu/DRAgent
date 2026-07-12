@@ -1,0 +1,393 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: advanced-chat
+  name: Ophthalmologist
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.3.8@592c8252795b5f75807de2d609a03196ed02596b409f7642b4a07548c7ff57ef
+    version: null
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.2.0@4e5891a2f4fff19b005a662a1fadff0e56b62b2dd1b4a93bdffae83c5b38b05e
+    version: null
+kind: app
+version: 0.6.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      - .MP4
+      - .MOV
+      - .MPEG
+      - .MPGA
+      allowed_file_types: []
+      allowed_file_upload_methods:
+      - remote_url
+      - local_file
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 50
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - remote_url
+        - local_file
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      configs: []
+      enabled: false
+      type: ''
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: knowledge-retrieval
+      id: 1739868374348-source-knowledge_retrieval-target
+      source: '1739868374348'
+      sourceHandle: source
+      target: knowledge_retrieval
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: answer
+      id: llm-source-1739966858105-target
+      source: llm
+      sourceHandle: source
+      target: '1739966858105'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: knowledge_retrieval-source-1750339102963-target
+      source: knowledge_retrieval
+      sourceHandle: source
+      target: '1750339102963'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1750339102963-source-llm-target
+      source: '1750339102963'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: llm
+      id: start-source-1739868374348-target
+      source: start
+      sourceHandle: source
+      target: '1739868374348'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: START
+        type: start
+        variables:
+        - label: id
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: id
+        - label: type
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: type
+        - label: report
+          max_length: 20000
+          options: []
+          required: true
+          type: paragraph
+          variable: report
+        - label: date
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: date
+        - label: discussion
+          max_length: 20000
+          options: []
+          required: true
+          type: paragraph
+          variable: discussion
+      height: 212
+      id: start
+      position:
+        x: 192.1920306699172
+        y: 283.4849975929137
+      positionAbsolute:
+        x: 192.1920306699172
+        y: 283.4849975929137
+      selected: false
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - O/8ZZW7xMuGndRgsrG1saPiCtkVT9QzzerLufCNHYtBm4aNK19yqdFu4Fg5sYl2A
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank
+            provider: langgenius/tongyi/tongyi
+          score_threshold: 0.4
+          top_k: 6
+          weights:
+            keyword_setting:
+              keyword_weight: 0.3
+            vector_setting:
+              embedding_model_name: text-embedding-3-large
+              embedding_provider_name: openai
+              vector_weight: 0.7
+        query_attachment_selector: []
+        query_variable_selector:
+        - '1739868374348'
+        - text
+        retrieval_mode: multiple
+        selected: false
+        single_retrieval_config: null
+        title: KNOWLEDGE RETRIEVAL
+        type: knowledge-retrieval
+      height: 90
+      id: knowledge_retrieval
+      position:
+        x: 839.5089883914038
+        y: 310.67910496031647
+      positionAbsolute:
+        x: 839.5089883914038
+        y: 310.67910496031647
+      selected: false
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        memory:
+          query_prompt_template: '{{#sys.query#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+        model:
+          completion_params: {}
+          mode: chat
+          name: gpt-5
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: ceb801f7-1e8e-4af0-b328-f70f68072281
+          role: system
+          text: '你是一个糖尿病视网膜病变眼科专家，你的职责是根据患者患病类型、病例报告、其他智能体建议，并参照指南信息制定精准且个性化的当前治疗策略。请遵循以下模板，生成的内容里不要重复：
+
+            1.疾病诊断：简要说明患者的诊断、分期和相关病史。
+
+            2.治疗原则：例如控制病情进展、改善视力、缓解症状等。
+
+            3. 治疗方案：根据疾病类型选择合适的治疗方式，可能包括（但不限于）：
+
+            · 药物治疗（如抗VEGF药物等,需说明药物种类或策略）
+
+            · 手术治疗（如激光光凝等）
+
+            4. 随访计划：根据疾病性质和治疗效果，安排定期随访和评估。
+
+            5. 患者教育：对患者进行相关教育。
+
+            6. 注意事项：需要注意的内容。
+
+            若该患者当前需要手术，则设计详尽的光凝手术方案，包含光凝手术类型、激光类型（颜色/波长）、光斑大小、功率、曝光时长、治疗分期、避让区域、激光斑总数等，若不需要则写无。手术参数如果产生冲突，听从手术专家智能体的意见。输出只有依照模板生成的治疗方案，保持简洁明了。注意方案只针对当下情况！避免过度治疗！
+
+            '
+        - id: 9ec0095c-c824-40ea-8e32-a0e1ecae1371
+          role: assistant
+          text: '患病类型{{#start.type#}};
+
+            病例报告{{#start.report#}};
+
+            眼科指南信息{{#1750339102963.text#}}};
+
+            其他智能体的建议{{#start.discussion#}}}'
+        selected: true
+        title: eye_doctor
+        type: llm
+        vision:
+          enabled: false
+          variable_selector: null
+      height: 88
+      id: llm
+      position:
+        x: 1484.6748629701428
+        y: 349.64392381288053
+      positionAbsolute:
+        x: 1484.6748629701428
+        y: 349.64392381288053
+      selected: true
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: gpt-5
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: a998b7c2-97c7-48d5-9c37-82a8258fc624
+          role: system
+          text: 你需要用分别用一句话精准概括提供给你的病例报告（包含视盘，黄斑，视网膜等重要病理特征）中的患病情况和其他智能体的建议（若为NONE则不考虑）。不用加入与治疗方案检索无关的个人信息\治疗建议等;常见术语应加上字母缩写（如黄斑水肿DME），便于检索。你的输出只有用于概括病历报告和治疗方案初稿的两句话
+        - id: e698804b-d361-4f74-818d-a661fe5dac36
+          role: assistant
+          text: '病例报告{{#start.report#}};
+
+            其他智能体的建议{{{#start.discussion#}}}'
+        selected: false
+        title: abstract
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 88
+      id: '1739868374348'
+      position:
+        x: 554.5033946261664
+        y: 304.4849975929137
+      positionAbsolute:
+        x: 554.5033946261664
+        y: 304.4849975929137
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#llm.text#}}/'
+        desc: ''
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 103
+      id: '1739966858105'
+      position:
+        x: 1779.6163420745013
+        y: 343.90810282081725
+      positionAbsolute:
+        x: 1779.6163420745013
+        y: 343.90810282081725
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - knowledge_retrieval
+          - result
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: gpt-5
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: b3099b10-248e-4c37-8946-5273cc7422c8
+          role: system
+          text: '你需要进根据患者的患病情况，对指南知识库进行内容提取，务必保留和当前患者治疗方案生成相关的所有的指南信息，请仅输出你提取后的指南信息，不添加其他内容
+
+            '
+        - id: 47af2644-6892-4099-b943-e55f3c3943ec
+          role: assistant
+          text: '这是患者病历报告{{#start.report#}}}，
+
+            这是其他智能体建议{{{#start.discussion#}}}，
+
+            这是相关指南知识库{{#context#}}'
+        selected: false
+        title: transformer
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 88
+      id: '1750339102963'
+      position:
+        x: 1176.704939583785
+        y: 343.90810282081725
+      positionAbsolute:
+        x: 1176.704939583785
+        y: 343.90810282081725
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: 10.055451004919178
+      y: 33.5376220817584
+      zoom: 0.8749501475821236
+  rag_pipeline_variables: []
