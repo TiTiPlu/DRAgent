@@ -20,10 +20,10 @@ evaluation/
   ncr_scoring.py       Guideline-compliance scoring (Supplementary Tables 1-2)
   distill.py           Structured distillation of plans before similarity
   objective_metrics.py Weighted BLEU / ROUGE-L / METEOR / BERTScore (Suppl. Table 3)
-data/
-  hybrid/           Hybrid real-synthetic cases (physician-revised)
-  real_sample/      De-identified real clinical cases (sample)
-  generated_sample/ DRAgent-generated cases (sample)
+DR_treatment_planning_dataset/
+  hybrid/              Hybrid real-synthetic cases (physician-revised)
+  real/                De-identified real clinical cases (sample)
+  large_data/          DRAgent-generated cases
 ```
 
 ## Agents
@@ -112,6 +112,15 @@ listed in Supplementary Tables 1-3.
 
 ## Data
 
+`DR_treatment_planning_dataset/` contains three subsets, each a directory of
+cases holding a clinical record and the corresponding treatment plan:
+
+| Subset | Role in the study |
+|---|---|
+| `hybrid/` | Physician-revised cases; the primary evaluation benchmark |
+| `real/` | Multi-center real clinical cases; independent validation |
+| `large_data/` | DRAgent-generated cases; a training and fine-tuning resource |
+
 Each case directory is named by its identifier in the source fundus-image
 dataset (EyeQ/EyePACS, OIA-DDR, MMRDR, IDRiD, APTOS 2019); use this name to
 retrieve the corresponding image from the original repository. The fundus images
@@ -126,6 +135,9 @@ guidelines cited in the paper. The guideline texts are copyrighted and are not
 included here; the `dataset_ids` in the DSLs refer to our own Dify workspace and
 must be replaced with your own.
 
+## Citation
+
+A citation will be added once the paper is published.
 
 ## License
 
