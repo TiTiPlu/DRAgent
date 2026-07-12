@@ -126,17 +126,6 @@ guidelines cited in the paper. The guideline texts are copyrighted and are not
 included here; the `dataset_ids` in the DSLs refer to our own Dify workspace and
 must be replaced with your own.
 
-## Citation
-
-```bibtex
-@article{shen2026dragent,
-  title   = {An agentic multidisciplinary framework for diabetic retinopathy treatment planning},
-  author  = {Shen, Tingting and Cai, Zhiyuan and Cheng, Pujin and Lin, Li and Tian, Meng
-             and Xia, Honghui and Jiang, Zhihao and Zhang, Ting and Wei, Yantao
-             and Wang, Zhaoyang and Yuan, Jin and Xu, Wenjun and Tang, Xiaoying},
-  year    = {2026}
-}
-```
 
 ## License
 
