@@ -1,0 +1,808 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: workflow
+  name: NCR scorer (ophthalmic)
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai_api_compatible:0.0.55@d64be9924f2edf13fd5329fc03fdfc0d0e0e36e0aef5321c4942f0845de8c030
+    version: null
+kind: app
+version: 0.6.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 50
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1752463165617-source-1752463402264-target
+      selected: false
+      source: '1752463165617'
+      sourceHandle: source
+      target: '1752463402264'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 17524637287840-source-17524640812320-target
+      selected: false
+      source: '17524637287840'
+      sourceHandle: source
+      target: '17524640812320'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1751897065702-source-1751896702062-target
+      source: '1751897065702'
+      sourceHandle: source
+      target: '1751896702062'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 17524640812320-source-17524642258720-target
+      source: '17524640812320'
+      sourceHandle: source
+      target: '17524642258720'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 1752546434475-false-17524637287840-target
+      source: '1752546434475'
+      sourceHandle: 'false'
+      target: '17524637287840'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 1752546434475-true-17525464915710-target
+      source: '1752546434475'
+      sourceHandle: 'true'
+      target: '17525464915710'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 17525464915710-source-17525465033960-target
+      source: '17525464915710'
+      sourceHandle: source
+      target: '17525465033960'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 17525465033960-source-17525465111220-target
+      source: '17525465033960'
+      sourceHandle: source
+      target: '17525465111220'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: code
+      id: 1751896479997-source-1752463165617-target
+      source: '1751896479997'
+      sourceHandle: source
+      target: '1752463165617'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1752463402264-3b0bcde9-96c9-48cb-be1f-584019916277-17525475732510-target
+      source: '1752463402264'
+      sourceHandle: 3b0bcde9-96c9-48cb-be1f-584019916277
+      target: '17525475732510'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1752463402264-true-17525477637300-target
+      source: '1752463402264'
+      sourceHandle: 'true'
+      target: '17525477637300'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 17525477637300-source-1752461694539-target
+      source: '17525477637300'
+      sourceHandle: source
+      target: '1752461694539'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1752461694539-source-1751897065702-target
+      source: '1752461694539'
+      sourceHandle: source
+      target: '1751897065702'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: if-else
+      id: 17525475732510-source-1752546434475-target
+      source: '17525475732510'
+      sourceHandle: source
+      target: '1752546434475'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: treatment
+          max_length: 5000000
+          options: []
+          required: true
+          type: paragraph
+          variable: treatment
+        - label: report
+          max_length: 500000
+          options: []
+          required: true
+          type: paragraph
+          variable: report
+        - label: type
+          max_length: 50000
+          options: []
+          required: true
+          type: paragraph
+          variable: type
+      height: 160
+      id: '1751896479997'
+      position:
+        x: 277.5588702128621
+        y: 277.4528503004688
+      positionAbsolute:
+        x: 277.5588702128621
+        y: 277.4528503004688
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1751897065702'
+          - text
+          value_type: string
+          variable: text1
+        selected: false
+        title: 结束
+        type: end
+      height: 88
+      id: '1751896702062'
+      position:
+        x: 2289.5157165665105
+        y: 313
+      positionAbsolute:
+        x: 2289.5157165665105
+        y: 313
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: claude-opus-4-8
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: f4c675df-85d6-487f-bff3-457904526d3d
+          role: system
+          text: "根据提供给你的治疗方案和评估点ID,你只需要判断该治疗方案在这些评估点上是否正确,你的输出必须为“评估点ID：TRUE/FLASE”。\n\
+            \    \n    #### 一、规范性问题（存在性评估）\n\n| ID | 评估要点      | 评分依据   |\n| :- |\
+            \ :-------- | :----------- |\n| S1 | 是否包含疾病诊断？ | 简要说明诊断、分期和病史 |\n| S2\
+            \ | 是否包含治疗原则？ | 明确治疗目标（≥1项）  |\n| S3 | 是否包含治疗方案？ | 至少包含1种治疗方式   |\n| S4\
+            \ | 是否包含随访计划？ | 明确随访频率/内容    |\n| S5 | 是否包含患者教育？ | 至少1项教育内容     |\n| S6\
+            \ | 是否包含注意事项？ | 至少1项注意事项     |\n| S7 | 全身疾病控制要求         | 提及血糖/血压控制  \
+            \    |\n| ID | 评估要点             | 指南核心要求         |\n| :- | :---------------\
+            \ | :------------- |\n| C1 | 重度NPDR/高危PDR患者          | 需PRP          \
+            \ |\n| C5 | DME或新生血管          | 抗VEGF          |\n| C6 | 玻璃体积血/牵拉性脱离 \
+            \ | PPV手术          |\n\n\n#### 三、光凝手术专项评估\n\n| ID | 参数项    | 指南标准范围  \
+            \   |\n| :- | :----- | :----------------------------- |\n| P1 | 手术类型明确\
+            \ | 必须明确PRP     |\n| P2 | 波长     | 绿/黄/红激光     |\n| P3 | 光斑大小   | PRP:200-500μm\
+            \ \n| P4 | 曝光时间   | 0.2-0.5秒  |\n| P5 | 激光强度   | 轻度灰白色（2～3反应）  |\n| P6\
+            \ | 治疗分期   | 3-4次完成      |\n| P7 | 避让区域   | 黄斑区     |\n| P8 |  激光斑总数（PRP）\
+            \  |   1600-2000                    |\n\n#### 四、治疗选择逻辑评估（关键决策点）\n\n| ID\
+            \ | 评估要点          | 指南决策逻辑             |\n| :- | :------------ | :-----------------\
+            \ |\n| D1 | 白内障合并DME      | 先行抗VEGF/激素，再白内障手术  |\n| D2 | 抗VEGF治疗方案   \
+            \  | 负荷期4周/次×3+N次 （3+PRN或T＆E）      |\n| D3 | 抗VEGF药物治疗应答不良 | 激素治疗    \
+            \           |\n"
+        - id: 91e26872-e6e1-4f7e-bbc5-69a6cf7f3283
+          role: user
+          text: 治疗方案{{#1751896479997.treatment#}}；需要评估的评估点ID"{{#1752461694539.result#}}"你的输出应该为“评估点ID：TRUE/FALSE”
+        selected: true
+        title: 评估1
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 88
+      id: '1751897065702'
+      position:
+        x: 1938.469124445573
+        y: 313
+      positionAbsolute:
+        x: 1938.469124445573
+        y: 313
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "\ndef main( arg1: str) -> dict:\n    return {\n        \"result\":\
+          \ \" S1, S2, S3, S4, S5, S6, S7, C1, P1, P2, P3, P4, P5, P6, P7, P8, \"\
+          + arg1,\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: S1-S7
+        type: code
+        variables:
+        - value_selector:
+          - '17525477637300'
+          - text
+          value_type: string
+          variable: arg1
+      height: 52
+      id: '1752461694539'
+      position:
+        x: 1585
+        y: 313
+      positionAbsolute:
+        x: 1585
+        y: 313
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "def main(arg1: str) -> dict:\n    if arg1 in [\"DR-3\", \"DR-4\" ]:\n\
+          \        return {\n            \"result\": \"True\"\n        }\n    elif\
+          \ arg1 in [\"DR-1\", \"DR-2\" ]:\n        return {\n            \"result\"\
+          : \"False\"\n        }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: DR专项
+        type: code
+        variables:
+        - value_selector:
+          - '1751896479997'
+          - type
+          value_type: string
+          variable: arg1
+      height: 52
+      id: '1752463165617'
+      position:
+        x: 651.0510812876375
+        y: 298.4528503004688
+      positionAbsolute:
+        x: 651.0510812876375
+        y: 298.4528503004688
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: contains
+            id: 047812b5-b401-41b5-8c1f-e778c9ec47b8
+            value: 'True'
+            varType: string
+            variable_selector:
+            - '1752463165617'
+            - result
+          id: 'true'
+          logical_operator: and
+        - case_id: 3b0bcde9-96c9-48cb-be1f-584019916277
+          conditions:
+          - comparison_operator: contains
+            id: 09da9f4f-8c09-4f9b-a066-9052cc001b60
+            value: 'False'
+            varType: string
+            variable_selector:
+            - '1752463165617'
+            - result
+          id: 3b0bcde9-96c9-48cb-be1f-584019916277
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 172
+      id: '1752463402264'
+      position:
+        x: 986
+        y: 258
+      positionAbsolute:
+        x: 986
+        y: 258
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "\ndef main( arg1: str) -> dict:\n    return {\n        \"result\":\
+          \ \"S1, S2, S3, S4, S5, S6, S7, \"+ arg1,\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: S1-S7 (2)
+        type: code
+        variables:
+        - value_selector:
+          - '17525475732510'
+          - text
+          value_type: string
+          variable: arg1
+      height: 52
+      id: '17524637287840'
+      position:
+        x: 2010.6386421719135
+        y: 727.4231535729393
+      positionAbsolute:
+        x: 2010.6386421719135
+        y: 727.4231535729393
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: claude-opus-4-8
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: f4c675df-85d6-487f-bff3-457904526d3d
+          role: system
+          text: '根据提供给你的治疗方案和评估点ID,你只需要判断该治疗方案在这些评估点上是否正确,你的输出必须为“评估点ID：TRUE/FLASE”。
+
+
+            | ID | 评估要点      | 评分依据（每项1分）   |
+
+            | S1 | 是否包含疾病诊断？ | 简要说明诊断、分期和病史 |
+
+            | S2 | 是否包含治疗原则？ | 明确治疗目标（≥1项）  |
+
+            | S3 | 是否包含治疗方案？ | 至少包含1种治疗方式   |
+
+            | S4 | 是否包含随访计划？ | 明确随访频率/内容    |
+
+            | S5 | 是否包含患者教育？ | 至少1项教育内容     |
+
+            | S6 | 是否包含注意事项？ | 至少1项注意事项     |
+
+            | S7 | 全身疾病控制要求         | 提及血糖 |
+
+
+            | ID | 评估要点             | 指南核心要求         |
+
+            | C2 |轻中度NPDR无DME    | 随访每6~12月           |
+
+            | C5 | DME        | 抗VEGF          |
+
+
+            | ID | 评估要点          | 指南决策逻辑             |
+
+            | :- | :------------ | :----------------- |
+
+            | D1 | 白内障合并DME      | 先行抗VEGF/激素，再白内障手术  |
+
+            | D2 | 抗VEGF治疗方案     | 负荷期4周/次×3+N次 （3+PRN或T＆E）      |
+
+            | D3 | 抗VEGF药物治疗应答不良 | 激素治疗               |
+
+            '
+        - id: 91e26872-e6e1-4f7e-bbc5-69a6cf7f3283
+          role: user
+          text: 治疗方案{{#1751896479997.treatment#}}；需要评估的评估点ID"{{#17524637287840.result#}}"你的输出应该为“评估点ID：TRUE/FALSE”
+        selected: false
+        title: 评估3
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 88
+      id: '17524640812320'
+      position:
+        x: 2389.8075093081916
+        y: 718.300155892692
+      positionAbsolute:
+        x: 2389.8075093081916
+        y: 718.300155892692
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '17524640812320'
+          - text
+          value_type: string
+          variable: text3
+        selected: false
+        title: 结束 (1)
+        type: end
+      height: 88
+      id: '17524642258720'
+      position:
+        x: 2740.594868472625
+        y: 741.7128336545188
+      positionAbsolute:
+        x: 2740.594868472625
+        y: 741.7128336545188
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: contains
+            id: 75e4812c-dee7-4121-b3cf-594594bc81d3
+            value: C3
+            varType: string
+            variable_selector:
+            - '17525475732510'
+            - text
+          - comparison_operator: contains
+            id: d635f061-0ea1-4fe9-8fed-094b7c042da1
+            value: C4
+            varType: string
+            variable_selector:
+            - '17525475732510'
+            - text
+          id: 'true'
+          logical_operator: or
+        desc: ''
+        selected: false
+        title: 条件分支 2
+        type: if-else
+      height: 150
+      id: '1752546434475'
+      position:
+        x: 1615.7114842998153
+        y: 521.7644982976852
+      positionAbsolute:
+        x: 1615.7114842998153
+        y: 521.7644982976852
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "\ndef main( arg1: str) -> dict:\n    return {\n        \"result\":\"\
+          S1, S2, S3, S4, S5, S6, S7, P1, P2, P3, P4, P5, P6, P7, P8, \"+ arg1,\n\
+          \    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: S1-S7 (1)
+        type: code
+        variables:
+        - value_selector:
+          - '17525475732510'
+          - text
+          value_type: string
+          variable: arg1
+      height: 52
+      id: '17525464915710'
+      position:
+        x: 2022.814594743063
+        y: 536.868212305143
+      positionAbsolute:
+        x: 2022.814594743063
+        y: 536.868212305143
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: claude-opus-4-8
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: f4c675df-85d6-487f-bff3-457904526d3d
+          role: system
+          text: "根据提供给你的治疗方案和评估点ID,你只需要判断该治疗方案在这些评估点上是否正确,你的输出必须为“评估点ID：TRUE/FLASE”。\n\
+            \    \n    #### 一、规范性问题（存在性评估）\n\n| ID | 评估要点      | 评分依据（每项1分）   |\n\
+            | :- | :-------- | :----------- |\n| S1 | 是否包含疾病诊断？ | 简要说明诊断、分期和病史 |\n\
+            | S2 | 是否包含治疗原则？ | 明确治疗目标（≥1项）  |\n| S3 | 是否包含治疗方案？ | 至少包含1种治疗方式   |\n\
+            | S4 | 是否包含随访计划？ | 明确随访频率/内容    |\n| S5 | 是否包含患者教育？ | 至少1项教育内容     |\n\
+            | S6 | 是否包含注意事项？ | 至少1项注意事项     |\n| S7 | 全身疾病控制要求         | 提及血糖/血压控制\
+            \      |\n| ID | 评估要点             | 指南核心要求         |\n| :- | :---------------\
+            \ | :------------- |\n| C2 |轻中度NPDR无DME    | 随访每6~12月           |\n| C3\
+            \ | 合并硬性渗出的毛细血管囊     | 局灶光凝         |\n| C4| | 视网膜无灌注区、IRMA和弥漫渗漏的毛细血管床|\
+            \ 格栅光凝| \n| C5 | DME          | 抗VEGF          |\n\n\n#### 三、光凝手术专项评估\n\
+            \n| ID | 参数项    | 指南标准范围                         |\n| :- | :----- | :-----------------------------\
+            \ |\n| P1 | 手术类型明确 | 必须明确手术类型                 |\n| P2 | 波长     | 绿/黄/红激光\
+            \                 |\n| P3 | 光斑大小   | PRP:200-500μm 格栅/局灶：100-200μm |\n\
+            | P4 | 曝光时间   | 0.2-0.5秒                 |\n| P5 | 激光强度   | 轻度灰白色（2～3反应）\
+            \                 |\n| P6 | 治疗分期   | 3-4次完成                         |\n\
+            | P7 | 避让区域   | 黄斑区                   |\n| P8 |  激光斑总数（PRP）  |PRP:1600-2000\
+            \          |\n\n#### 四、治疗选择逻辑评估（关键决策点）\n\n| ID | 评估要点          | 指南决策逻辑\
+            \             |\n| :- | :------------ | :----------------- |\n| D1 | 白内障合并DME\
+            \      | 先行抗VEGF/激素，再白内障手术  |\n| D2 | 抗VEGF治疗方案     | 负荷期4周/次×3+N次 （3+PRN或T＆E）\
+            \      |\n| D3 | 抗VEGF药物治疗应答不良 | 激素治疗     |\n"
+        - id: 91e26872-e6e1-4f7e-bbc5-69a6cf7f3283
+          role: user
+          text: 治疗方案{{#1751896479997.treatment#}}；需要评估的评估点ID"{{#17525464915710.result#}}"你的输出应该为“评估点ID：TRUE/FALSE”
+        selected: false
+        title: 评估2
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 88
+      id: '17525465033960'
+      position:
+        x: 2353.9771517354534
+        y: 507.38798111487995
+      positionAbsolute:
+        x: 2353.9771517354534
+        y: 507.38798111487995
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '17525465033960'
+          - text
+          value_type: string
+          variable: text2
+        selected: false
+        title: 结束 (2)
+        type: end
+      height: 88
+      id: '17525465111220'
+      position:
+        x: 2699.1678847186613
+        y: 514.1188063505708
+      positionAbsolute:
+        x: 2699.1678847186613
+        y: 514.1188063505708
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: claude-opus-4-8
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 82da20e4-a367-4dce-978b-485a296da2c8
+          role: system
+          text: "根据提供给你的患者病历报告和评估规则，输出触发评估点的ID：\n### 评估规则\n1. 正确性 (C2-C7): 仅当患者实际病理特征符合时才触发\n\
+            2. 决策逻辑 (D2-D5): 仅当包含相应治疗方式及患者特殊状况时才触发\n       \n一、正确性问题（患者驱动型）\nID 评估要点（C2、C5有且仅有一个）\n\
+            C2无DME\nC3局部性黄斑水肿、微动脉瘤渗漏点集中\nC4视网膜无灌注区、IRMA和弥漫渗漏的毛细血管床\n格栅光凝\nC5和D2黄斑水肿（DME）\n\
+            \n\n二、治疗选择逻辑评估（关键决策点）\nID评估要点\nD1白内障合并DME\nD2抗VEGF治疗方案\nD3抗VEGF药物治疗应答不良\n\
+            \n\n\n请只输出该病历报告所触发的所有评估点的ID\n\n   "
+        - id: f75f6897-37cc-490c-9fc9-d9cda8b791a7
+          role: user
+          text: 病历报告{{#1751896479997.report#}}；
+        selected: false
+        title: 选择评估点 (2)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 88
+      id: '17525475732510'
+      position:
+        x: 1267.288254841812
+        y: 507.38798111487995
+      positionAbsolute:
+        x: 1267.288254841812
+        y: 507.38798111487995
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: claude-opus-4-8
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 82da20e4-a367-4dce-978b-485a296da2c8
+          role: system
+          text: "根据提供给你的患者病历报告和评估规则，输出触发评估点的ID：\n\n1. 正确性 (C2-C7): 仅当患者实际病理特征符合时才触发\n\
+            2. 决策逻辑 (D2-D5): 仅当包含相应治疗方式及患者特殊状况时才触发\n\n一、正确性问题（患者驱动型）\nC5和D2:黄斑水肿（DME）或新生血管\n\
+            C6:玻璃体积血\n二、治疗选择逻辑评估（关键决策点）\nID评估要点\nD1白内障合并DME\nD2抗VEGF治疗方案\nD3抗VEGF药物治疗应答不良\n\
+            \n请只输出该病历报告所触发的所有评估点的ID\n\n   "
+        - id: f75f6897-37cc-490c-9fc9-d9cda8b791a7
+          role: user
+          text: 患者病历报告{{#1751896479997.report#}}
+        selected: false
+        structured_output_enabled: false
+        title: 选择评估点 (1)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 88
+      id: '17525477637300'
+      position:
+        x: 1323.8480868181398
+        y: 274.6632398301901
+      positionAbsolute:
+        x: 1323.8480868181398
+        y: 274.6632398301901
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: -1166.0095995431993
+      y: 25.253513027384088
+      zoom: 0.6576785624960676
+  rag_pipeline_variables: []

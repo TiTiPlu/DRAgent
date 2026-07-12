@@ -1,0 +1,304 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: workflow
+  name: NCR scorer (endocrine)
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai_api_compatible:0.0.55@d64be9924f2edf13fd5329fc03fdfc0d0e0e36e0aef5321c4942f0845de8c030
+    version: null
+kind: app
+version: 0.6.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 50
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1751897065702-source-1751896702062-target
+      source: '1751897065702'
+      sourceHandle: source
+      target: '1751896702062'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 17525477637300-source-1752461694539-target
+      source: '17525477637300'
+      sourceHandle: source
+      target: '1752461694539'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1752461694539-source-1751897065702-target
+      source: '1752461694539'
+      sourceHandle: source
+      target: '1751897065702'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: llm
+      id: 1751896479997-source-17525477637300-target
+      source: '1751896479997'
+      sourceHandle: source
+      target: '17525477637300'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: treatment
+          max_length: 5000000
+          options: []
+          required: true
+          type: paragraph
+          variable: treatment
+        - label: report
+          max_length: 500000
+          options: []
+          required: true
+          type: paragraph
+          variable: report
+        - label: type
+          max_length: 50000
+          options: []
+          required: true
+          type: paragraph
+          variable: type
+      height: 160
+      id: '1751896479997'
+      position:
+        x: 277.5588702128621
+        y: 277.4528503004688
+      positionAbsolute:
+        x: 277.5588702128621
+        y: 277.4528503004688
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1751897065702'
+          - text
+          value_type: string
+          variable: text
+        selected: false
+        title: 结束
+        type: end
+      height: 88
+      id: '1751896702062'
+      position:
+        x: 1461.6222671545927
+        y: 323.6853233371243
+      positionAbsolute:
+        x: 1461.6222671545927
+        y: 323.6853233371243
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: claude-opus-4-8
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: f4c675df-85d6-487f-bff3-457904526d3d
+          role: system
+          text: "根据提供给你的治疗方案和需要评估的评估点ID,判断该治疗方案在这些评估点上是否正确,你的输出必须为“评估点ID：TRUE/FLASE”。\n\
+            \    \n    一、 目标设定（结构性评估）\nID\n评估要点\n指南核心要求\n评分标准\nA1\n个体化HbA1c控制目标\n\
+            设定个体化目标（如<7.0%，或根据情况放宽/收紧）\nA2\n综合控制目标\n提及血压(<130/80mmHg)、血脂(LDL-C<2.6/1.8)目标\n\
+            二、 核心治疗正确性（患者驱动型）\nID\n评估要点\n指南核心要求\n评分标准\nX1\n所有T2DM无禁忌证\n应包含二甲双胍\nX2\n\
+            T2DM合并ASCVD\n优先选择GLP-1RA或SGLT2i\nX3\nT2DM合并心衰/肾病\n优先选择SGLT2i（心衰/CKD）或GLP-1RA（CKD）\n\
+            符合=3分\nX4\n启用胰岛素指征\n明确符合以下任一指征：1.口服药疗效不佳(HbA1c≥7.0%)2.高血糖症状/HbA1c≥9.0%3.无法解释的体重下降\n\
+            三、 随访与监测计划\nID\n评估要点\n指南标准范围\n评分标准\nU1\n血糖监测\n提及自我血糖监测或HbA1c检测频率\nU2\n\
+            并发症监测\n提及血压、血脂、肾功能监测\n"
+        - id: beab9aa5-14f6-4ffa-b6aa-903512a06aaa
+          role: user
+          text: '
+
+            治疗方案{{#1751896479997.treatment#}}；评估点ID"{{#1752461694539.result#}}"
+
+            你的输出应该为“评估点ID：TRUE'
+        selected: true
+        title: 评估1
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 88
+      id: '1751897065702'
+      position:
+        x: 1176.126750735258
+        y: 329.6689451851672
+      positionAbsolute:
+        x: 1176.126750735258
+        y: 329.6689451851672
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "\ndef main( arg1: str) -> dict:\n    return {\n        \"result\":\
+          \ \"A1, A2,\"+ arg1+\", U1, U2\",\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 必需评估点
+        type: code
+        variables:
+        - value_selector:
+          - '17525477637300'
+          - text
+          value_type: string
+          variable: arg1
+      height: 52
+      id: '1752461694539'
+      position:
+        x: 885.1677027645371
+        y: 335.87720163492844
+      positionAbsolute:
+        x: 885.1677027645371
+        y: 335.87720163492844
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: claude-opus-4-8
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 82da20e4-a367-4dce-978b-485a296da2c8
+          role: system
+          text: "根据提供给你的患者病历报告和治疗方案。输出该病历报告所触发的所有评估点的ID\n    \n这是评估规则：\n二、 核心治疗正确性（患者驱动型）\n\
+            ID\n评估要点\nX1\n所有T2DM无禁忌证\nX2\nT2DM合并ASCVD\nX3\nT2DM合并心衰/肾病\nX4\n启用胰岛素指征\n\
+            \n"
+        - id: be72fdf6-d8bd-4163-8d92-0d242cb21a6f
+          role: user
+          text: '
+
+            病历报告{{#1751896479997.report#}}；
+
+            治疗方案{{#1751896479997.treatment#}}；
+
+            请只输出该病历报告所触发的所有评估点的ID'
+        selected: false
+        structured_output_enabled: false
+        title: 选择评估点 (1)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 88
+      id: '17525477637300'
+      position:
+        x: 582.6685725050143
+        y: 304.0190971482536
+      positionAbsolute:
+        x: 582.6685725050143
+        y: 304.0190971482536
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: -697.995523760551
+      y: -36.80973529609105
+      zoom: 0.8356143030053553
+  rag_pipeline_variables: []
