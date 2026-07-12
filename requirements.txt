@@ -1,0 +1,6 @@
+requests
+pandas
+jieba
+nltk
+rouge-chinese
+bert-score
