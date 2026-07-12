@@ -15,8 +15,11 @@ agents/
   dsl/            Dify workflow for each clinical agent
   pipeline.py     Full pipeline: fundus image -> clinical record -> treatment plan
 evaluation/
+  dsl/                 Dify workflow for each guideline-compliance scorer
+  loader.py            Locates plans and references for either output layout
   ncr_scoring.py       Guideline-compliance scoring (Supplementary Tables 1-2)
-  objective_metrics.py Plan distillation and weighted similarity (Supplementary Table 3)
+  distill.py           Structured distillation of plans before similarity
+  objective_metrics.py Weighted BLEU / ROUGE-L / METEOR / BERTScore (Suppl. Table 3)
 data/
   hybrid/           Hybrid real-synthetic cases (physician-revised)
   real_sample/      De-identified real clinical cases (sample)
@@ -73,14 +76,39 @@ case, so an interrupted run resumes where it stopped.
 
 ## Evaluate
 
+`--layout agent` reads the DRAgent tree; `--layout llm` reads the flat tree used
+by the standalone LLMs and by HuatuoGPT-3. Everything downstream of `loader.py`
+is identical for the two, so no system is advantaged by its preprocessing.
+
+Guideline compliance:
+
 ```bash
-python evaluation/ncr_scoring.py       --plans plans/
-python evaluation/objective_metrics.py --plans plans/ --refs data/hybrid/
+export DIFY_SCORER_OPHTHALMIC_KEY=app-...
+export DIFY_SCORER_ENDOCRINE_KEY=app-...
+
+python evaluation/ncr_scoring.py --scheme ophthalmic --layout agent \
+    --run-root run/ --report-root reports/ --out ncr_ophth_agent.csv
+python evaluation/ncr_scoring.py --scheme endocrine --layout llm \
+    --run-root run/ --report-root reports/ --out ncr_endo_llm.csv
 ```
 
-The guideline-compliance criteria and the objective-similarity weights are
-specified in Supplementary Tables 1-3 of the paper and implemented directly in
-these scripts.
+Objective similarity (distil first, then score):
+
+```bash
+export DISTILL_API_KEY=...
+
+python evaluation/distill.py --layout agent --run-root run/ --report-root reports/
+python evaluation/objective_metrics.py --layout agent --run-root run/ \
+    --report-root reports/ --ref-root reference/ --out metrics_agent.csv
+```
+
+The scoring criteria are wrapped in two Dify workflows
+(`evaluation/dsl/scorer_ophthalmic.yml`, `evaluation/dsl/scorer_endocrine.yml`),
+scored by Claude Opus 4.8 — a third-party model independent of every system under
+test. Each workflow first selects the criteria a case triggers, then returns one
+TRUE/FALSE verdict per triggered criterion; `ncr_scoring.py` turns those verdicts
+into the Normalized Compliance Rate. The criteria and the aggregation weights are
+listed in Supplementary Tables 1-3.
 
 ## Data
 
