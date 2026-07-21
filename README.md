@@ -76,9 +76,18 @@ case, so an interrupted run resumes where it stopped.
 
 ## Evaluate
 
-`--layout agent` reads the DRAgent tree; `--layout llm` reads the flat tree used
-by the standalone LLMs and by HuatuoGPT-3. Everything downstream of `loader.py`
-is identical for the two, so no system is advantaged by its preprocessing.
+The unified evaluator has two explicit layouts:
+
+- `--layout agent`: `--run-root` is one `agents/pipeline.py` output root and
+  contains `DR-1` through `DR-4` directly. Reports normally sit beside plans.
+  For a consolidated plan-only copy, pass the grade-stratified report tree with
+  `--report-root` explicitly.
+- `--layout llm`: `--run-root` contains `{model}/{DR-N}/{case_id}.md`, the flat
+  output produced by the standalone-LLM generators (and used by HuatuoGPT-3).
+  `--report-root` is required.
+
+Both layouts use the same distillation, objective metrics, NCR criteria, and
+aggregation code after case discovery.
 
 Guideline compliance:
 
@@ -87,7 +96,7 @@ export DIFY_SCORER_OPHTHALMIC_KEY=app-...
 export DIFY_SCORER_ENDOCRINE_KEY=app-...
 
 python evaluation/ncr_scoring.py --scheme ophthalmic --layout agent \
-    --run-root run/ --report-root reports/ --out ncr_ophth_agent.csv
+    --run-root run/gpt5/ --model-name gpt5 --out ncr_ophth_agent.csv
 python evaluation/ncr_scoring.py --scheme endocrine --layout llm \
     --run-root run/ --report-root reports/ --out ncr_endo_llm.csv
 ```
@@ -97,10 +106,18 @@ Objective similarity (distil first, then score):
 ```bash
 export DISTILL_API_KEY=...
 
-python evaluation/distill.py --layout agent --run-root run/ --report-root reports/
-python evaluation/objective_metrics.py --layout agent --run-root run/ \
-    --report-root reports/ --ref-root reference/ --out metrics_agent.csv
+python evaluation/distill.py --layout agent --run-root run/gpt5/ --model-name gpt5
+python evaluation/objective_metrics.py --layout agent --run-root run/gpt5/ \
+    --model-name gpt5 --ref-root reference/ --out metrics_agent.csv
 ```
+
+For an agent run, each clinical report is read from the pipeline case directory:
+`{run-root}/{DR-N}/{case_id}/眼底病病例报告.md`. Physician-reference
+abstracts use `reference/{DR-N}/{case_id}/治疗方案_abstract.md`.
+
+Standalone-LLM plans use `{run-root}/{model}/{DR-N}/{case_id}.md`; their
+distilled form is `{case_id}_abstract.md` in the same directory. Their reports
+are read from `{report-root}/{DR-N}/{case_id}/眼底病病例报告.md`.
 
 The scoring criteria are wrapped in two Dify workflows
 (`evaluation/dsl/scorer_ophthalmic.yml`, `evaluation/dsl/scorer_endocrine.yml`),

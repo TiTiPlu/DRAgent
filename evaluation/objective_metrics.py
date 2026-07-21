@@ -29,7 +29,7 @@ from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 from nltk.translate.meteor_score import meteor_score
 from rouge_chinese import Rouge
 
-from loader import iter_cases, distilled_path, read
+from loader import iter_cases, distilled_path, read, resolve_reference_path
 
 warnings.filterwarnings("ignore")
 
@@ -129,24 +129,33 @@ def main():
     ap.add_argument("--layout", choices=["agent", "llm"], required=True,
                     help="'llm' also covers HuatuoGPT-3")
     ap.add_argument("--run-root", required=True)
-    ap.add_argument("--report-root", required=True)
+    ap.add_argument("--report-root", default=None,
+                    help="required for LLM; optional explicit report source for a consolidated agent tree")
     ap.add_argument("--ref-root", required=True,
                     help="distilled physician reference plans, one per case_id")
     ap.add_argument("--stage", default="final")
     ap.add_argument("--models", nargs="*", default=None)
+    ap.add_argument("--model-name", default=None,
+                    help="label for an agent pipeline run (default: run-root basename)")
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
 
     cases = list(iter_cases(args.run_root, args.report_root, args.layout,
-                            args.stage, args.models))
+                            args.stage, args.models, args.model_name))
     print(f"{len(cases)} cases", flush=True)
+    if not cases:
+        raise SystemExit(
+            "no cases found; check the selected layout and roots. A pipeline "
+            "agent tree keeps reports beside plans; a consolidated agent tree "
+            "and an LLM tree require --report-root"
+        )
 
     scorer = BERTScorer(model_type="bert-base-chinese", lang="zh")
 
     rows = []
     for case in cases:
         gen_path = distilled_path(case, args.layout)
-        ref_path = os.path.join(args.ref_root, f"{case.case_id}_abstract.md")
+        ref_path = resolve_reference_path(args.ref_root, case.grade, case.case_id)
         if not os.path.exists(gen_path) or not os.path.exists(ref_path):
             continue
 
@@ -176,6 +185,11 @@ def main():
 
     df = pd.DataFrame(rows)
     df.to_csv(args.out, index=False, encoding="utf-8-sig")
+    if df.empty:
+        raise SystemExit(
+            "no cases were scored; check the run/report/reference roots, layout, "
+            "stage, and required distilled files"
+        )
     print(df.groupby("model")[METRICS].mean().round(4).to_string(), flush=True)
 
 
