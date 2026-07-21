@@ -181,18 +181,26 @@ def main():
     ap.add_argument("--layout", choices=["agent", "llm"], required=True,
                     help="'llm' also covers HuatuoGPT-3")
     ap.add_argument("--run-root", required=True)
-    ap.add_argument("--report-root", required=True)
+    ap.add_argument("--report-root", default=None,
+                    help="required for LLM; optional explicit report source for a consolidated agent tree")
     ap.add_argument("--stage", default="final", help="DRAgent stage to score")
     ap.add_argument("--models", nargs="*", default=None)
+    ap.add_argument("--model-name", default=None,
+                    help="label for an agent pipeline run (default: run-root basename)")
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
 
     cfg = SCHEMES[args.scheme]
-    api_key = os.environ[cfg["env_key"]]
-
     cases = list(iter_cases(args.run_root, args.report_root, args.layout,
-                            args.stage, args.models))
+                            args.stage, args.models, args.model_name))
     print(f"{len(cases)} cases", flush=True)
+    if not cases:
+        raise SystemExit(
+            "no cases found; check the selected layout and roots. A pipeline "
+            "agent tree keeps reports beside plans; a consolidated agent tree "
+            "and an LLM tree require --report-root"
+        )
+    api_key = os.environ[cfg["env_key"]]
 
     fields = (["model", "grade", "case_id", "actual_score", "triggered_max", "ncr",
                "triggered_items"] + list(cfg["weights"]))
