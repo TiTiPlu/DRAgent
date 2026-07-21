@@ -146,25 +146,25 @@ workflow:
           type: text-input
           variable: id
         - label: type
-          max_length: 256
+          max_length: 48
           options: []
           required: true
           type: text-input
           variable: type
         - label: report
-          max_length: 20000
+          max_length: 8192
           options: []
           required: true
           type: paragraph
           variable: report
         - label: date
-          max_length: 256
+          max_length: 48
           options: []
           required: true
           type: text-input
           variable: date
         - label: discussion
-          max_length: 20000
+          max_length: 8192
           options: []
           required: true
           type: paragraph

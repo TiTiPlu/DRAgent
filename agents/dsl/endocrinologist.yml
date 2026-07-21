@@ -135,13 +135,13 @@ workflow:
         type: start
         variables:
         - label: report
-          max_length: 20000
+          max_length: 8192
           options: []
           required: true
           type: paragraph
           variable: report
         - label: eye_treatment
-          max_length: 20000
+          max_length: 8192
           options: []
           required: true
           type: paragraph

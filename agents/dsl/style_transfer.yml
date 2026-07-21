@@ -145,7 +145,7 @@ workflow:
         type: start
         variables:
         - label: GPT_report
-          max_length: 480000
+          max_length: 8192
           options: []
           required: true
           type: paragraph

@@ -231,19 +231,19 @@ workflow:
         type: start
         variables:
         - label: treatment
-          max_length: 5000000
+          max_length: 8192
           options: []
           required: true
           type: paragraph
           variable: treatment
         - label: report
-          max_length: 500000
+          max_length: 8192
           options: []
           required: true
           type: paragraph
           variable: report
         - label: type
-          max_length: 50000
+          max_length: 48
           options: []
           required: true
           type: paragraph

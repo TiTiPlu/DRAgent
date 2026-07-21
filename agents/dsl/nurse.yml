@@ -128,13 +128,13 @@ workflow:
         type: start
         variables:
         - label: fundation_treatment
-          max_length: 20000
+          max_length: 8192
           options: []
           required: true
           type: paragraph
           variable: fundation_treatment
         - label: combined_treatment
-          max_length: 200000
+          max_length: 8192
           options: []
           required: true
           type: paragraph
