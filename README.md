@@ -138,6 +138,12 @@ cases holding a clinical record and the corresponding treatment plan:
 | `real/` | Multi-center real clinical cases; independent validation |
 | `large_data/` | DRAgent-generated cases; a training and fine-tuning resource |
 
+The released hybrid subset contains 1,040 cases: 338 DR-1, 396 DR-2,
+222 DR-3, and 84 DR-4. Each case includes both a clinical record and a
+physician-revised treatment plan. For 17 source-image identifiers that occur
+twice in the curated cohort, the second case directory uses a `_new` suffix to
+keep both records distinct; remove that suffix when resolving the source image.
+
 Each case directory is named by its identifier in the source fundus-image
 dataset (EyeQ/EyePACS, OIA-DDR, MMRDR, IDRiD, APTOS 2019); use this name to
 retrieve the corresponding image from the original repository. The fundus images
