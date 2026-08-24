@@ -21,9 +21,9 @@ evaluation/
   distill.py           Structured distillation of plans before similarity
   objective_metrics.py Weighted BLEU / ROUGE-L / METEOR / BERTScore (Suppl. Table 3)
 DR_treatment_planning_dataset/
-  hybrid/              Hybrid real-synthetic cases (physician-revised)
+  Hybrid/              Hybrid real-synthetic cases (physician-revised)
   real/                De-identified real clinical cases (sample)
-  large_data/          DRAgent-generated cases
+  large_data/          Released sample of 4,392 DRAgent-generated cases
 ```
 
 ## Agents
@@ -134,9 +134,9 @@ cases holding a clinical record and the corresponding treatment plan:
 
 | Subset | Role in the study |
 |---|---|
-| `hybrid/` | Physician-revised cases; the primary evaluation benchmark |
+| `Hybrid/` | Physician-revised cases; the primary evaluation benchmark |
 | `real/` | Multi-center real clinical cases; independent validation |
-| `large_data/` | DRAgent-generated cases; a training and fine-tuning resource |
+| `large_data/` | Released sample of 4,392 DRAgent-generated cases |
 
 The released hybrid subset contains 1,040 cases: 338 DR-1, 396 DR-2,
 222 DR-3, and 84 DR-4. Each case includes both a clinical record and a
