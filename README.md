@@ -142,6 +142,11 @@ The released hybrid subset contains 1,040 cases: 338 DR-1, 396 DR-2,
 222 DR-3, and 84 DR-4. Each case includes both a clinical record and a
 physician-revised treatment plan.
 
+`evaluation_split_588.csv` identifies the 588 hybrid cases used for the
+comparative and ablation experiments. Its columns record the case identifier
+(`case_id`), the corresponding source fundus-image identifier
+(`source_image_id`), and the DR severity grade (`dr_grade`).
+
 Each case directory is named by its identifier in the source fundus-image
 dataset (EyeQ/EyePACS, OIA-DDR, MMRDR, IDRiD, APTOS 2019); use this name to
 retrieve the corresponding image from the original repository. The fundus images
