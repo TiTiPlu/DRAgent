@@ -138,6 +138,21 @@ cases holding a clinical record and the corresponding treatment plan:
 | `real/` | Multi-center real clinical cases; independent validation |
 | `large_data/` | Released sample of 4,392 DRAgent-generated cases |
 
+### Large-scale data curation
+
+The large-scale dataset will use the complete DR-positive MMRDR-CFP collection
+in place of the previously released DDR subset. The DDR subset was selected by
+automated image-quality screening, whereas MMRDR-CFP is a clinically curated
+reorganization of CFP images originating from OIA-DDR. The local MMRDR
+processing batches contain 2,137 cases in `MMRDR-q`, 834 cases in `MMRDR-q2`,
+and 1,568 cases in `MMRDR-remaining-1568`. The 402 cases in `MMRDR-q3` are
+already included in `MMRDR-q2` and are therefore not counted again. After
+deduplication, the complete MMRDR-CFP contribution is 4,539 cases.
+
+Together with 505 APTOS 2019 cases, MMRDR-CFP currently accounts for 5,044 of
+the planned 8,908 large-scale generated cases, leaving 3,864 cases to complete
+the dataset.
+
 The released hybrid subset contains 1,040 cases: 338 DR-1, 396 DR-2,
 222 DR-3, and 84 DR-4. Each case includes both a clinical record and a
 physician-revised treatment plan.
